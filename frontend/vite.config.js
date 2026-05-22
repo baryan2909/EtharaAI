@@ -1,0 +1,11 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 5173,
+    host: '127.0.0.1',   // Force IPv4 — fixes ERR_CONNECTION_REFUSED on Node v26
+    strictPort: true,
+  }
+});
