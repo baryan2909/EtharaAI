@@ -1,99 +1,133 @@
-# CollabFlow 🚀 (Team Task Manager)
+# 🚀 CollabFlow — Premium Team Task Manager
 
-CollabFlow is a premium, feature-rich, full-stack **Team Task Manager** application (similar to an elevated Trello or Asana). It enables teams to orchestrate projects, manage tasks via an interactive drag-and-drop Kanban board, synchronize changes in real-time, track analytics in a comprehensive dashboard, and enforce roles (Admin vs. Member) securely with JWT authentication.
-
-Designed with a premium modern glassmorphic interface, dynamic dark/light themes, custom SVG/CSS widgets, and rich animations.
+<div align="center">
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="TailwindCSS" />
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="NodeJS" />
+  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="ExpressJS" />
+  <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
+  <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
+  <img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white" alt="Netlify" />
+</div>
 
 ---
 
-## ✨ Key Elevated Features
+### 🌟 Introduction
+**CollabFlow** is a premium, feature-rich, full-stack **Team Task Manager** application designed to deliver an elevated project orchestration experience. Built with a luxurious **dark glassmorphic user interface**, stable real-time synchronization, and a bulletproof, crash-resistant architecture, CollabFlow redefines collaborative productivity.
 
-1. **Real-time Live Sync (WebSockets):**
-   * Powered by **Socket.io**.
-   * Collaborative rooms segmented by `projectId`.
-   * Dragging a task on the Kanban board or updating details instantly propagates status changes, creation, and deletion to all other connected teammates in real-time without requiring a page refresh.
+It features an interactive drag-and-drop Kanban board, a robust Admin Analytics panel, role-based access control, automatic database seeding, and graceful offline/online fallback features.
 
-2. **Premium Admin Analytics Console:**
-   * Available exclusively to **Admin** users on their main Dashboard.
-   * Features interactive CSS/SVG-based gauges showing workspace **Velocity**, completion ratios, and task distribution across *Pending*, *In Progress*, and *Completed* columns.
-   * Includes a **Resource Allocation Index** detailing team member task workloads.
-   * A full **Project Portfolio Audit Table** listing staffing, complete-vs-total task load, progress percentages, and project health statuses.
+---
 
-3. **User Profile & Avatar Upload Hub:**
-   * Allow users to edit their profile details (Name, Email) inline.
-   * Seamless profile picture uploading via **Multer** and **Cloudinary**.
-   * **Graceful Offline Fallback:** If Cloudinary keys are not provided in `.env`, the server automatically converts raw image buffers into **Base64 Data URIs** and saves them in Mongoose. Out-of-the-box avatar uploads work flawlessly in local development!
-   * Visual loading spinners and modern, rounded letter-fallback icons are rendered across the Navbar and Sidebar.
+## 💎 Key Elevated Features
 
-4. **Automated Nodemailer Dispatches:**
-   * Secure SMTP helper scaffolded with standard email transports.
-   * **Safe Fallback:** If SMTP configurations are omitted, the dispatch logic gracefully logs beautifully formatted HTML emails straight to your console.
+### ⚡ 1. Real-time Live Sync (WebSockets)
+* Powered by **Socket.io** with localized workspace rooms segmented by `projectId`.
+* Moving a task card on the Kanban board or modifying priority instantly propagates to all other connected teammates in real-time, eliminating manual page reloads.
+
+### 📊 2. Premium Admin Analytics Console
+* Available exclusively to **Admins** on their main dashboard.
+* **Completion Velocity Meter:** Interactive SVG-based gauge showing real-time task completion ratios.
+* **Resource Allocation Index:** Visualized chart detailing workload distribution across active team members.
+* **Project Portfolio Audit:** Interactive table tracking staffing loads, completion percentages, and dynamic health tags.
+
+### 🖼️ 3. Safe Avatar Uploads & Offline Fallback
+* Full user profile customizer with live avatar uploads powered by **Multer** and **Cloudinary**.
+* **Zero-Config Local Fallback:** If Cloudinary keys are omitted in development, the backend automatically converts image uploads to **Base64 Data URIs** and stores them in MongoDB. Uploads work flawlessly out of the box!
+
+### 🛡️ 4. Crash-Proof React Architecture
+* **Location-Aware Error Boundary:** Wrapped inside `DashboardLayout` using the active route path as a dynamic key. If a specific page encounters a parsing error, the Sidebar and Navbar remain fully functional. Simply navigating to another tab instantly unmounts the crashed state and resets the UI!
+* **Safe Date Utility:** All date parsing processes are wrapped in a robust helper utility that detects invalid date formats and returns elegant placeholders (e.g. `"No date"`) instead of triggering raw JS `RangeError` virtual DOM crashes.
+
+### 🎨 5. Overlap-Free Premium Aesthetics
+* Input fields inside `Login.jsx` and `Signup.jsx` feature custom left-padding CSS overrides that prevent Lucide icons from overlapping text across all viewport resolutions.
 
 ---
 
 ## 🏗️ Folder Structure
 
 ```text
-/ (workspace root)
-├── backend/
-│   ├── src/
-│   │   ├── config/          # DB connection and helper configs
-│   │   ├── controllers/     # Route controllers (Auth, Project, Task, Users, Dashboard)
-│   │   ├── middleware/      # Auth, Role checking, Multer upload, Central Error Handler
-│   │   ├── models/          # Mongoose Schemas (User, Project, Task)
-│   │   ├── routes/          # Express route mappings
-│   │   ├── utils/           # Scaffolding utilities (emailService)
-│   │   ├── app.js           # Express application configurations
-│   │   └── server.js        # Socket.io wrapper & Server bootloader
+📂 CollabFlow (Workspace Root)
+├── 📂 backend
+│   ├── 📂 src
+│   │   ├── 📂 config          # DB connection and helper configs
+│   │   ├── 📂 controllers     # Route controllers (Auth, Project, Task, Users, Dashboard)
+│   │   ├── 📂 middleware      # Auth, Role checks, Multer upload, Central Error Handler
+│   │   ├── 📂 models          # Mongoose Schemas (User, Project, Task)
+│   │   ├── 📂 routes          # Express API route definitions
+│   │   ├── 📂 utils           # SMTP Mail and date formatting utilities
+│   │   ├── app.js             # Express app setup
+│   │   └── server.js          # Socket.io wrapper & Server bootloader
 │   ├── package.json
 │   ├── .env.example
 │   └── .env
-├── frontend/
-│   ├── src/
-│   │   ├── components/      # Common elements, layout structures (Sidebar, Navbar)
-│   │   ├── context/         # Auth, Socket, Theme, and Toast Context Providers
-│   │   ├── pages/           # Dashboard, Projects, Board, Workspace Tasks, Profile
-│   │   ├── services/        # Axios API client wrapper
-│   │   ├── App.jsx          # Router & context setups
-│   │   ├── index.css        # Core styling and custom tailwind styles
+├── 📂 frontend
+│   ├── 📂 src
+│   │   ├── 📂 components      # Common UI elements and Layout (Sidebar, Navbar, ErrorBoundary)
+│   │   ├── 📂 context         # Auth, Socket, Theme, and Toast Context Providers
+│   │   ├── 📂 pages           # Dashboard, Projects, Kanban Board, Tasks, Profile
+│   │   ├── 📂 services        # Axios API client wrapper
+│   │   ├── 📂 utils           # Crash-proof Date formatting utility
+│   │   ├── App.jsx            # Router & Context configurations
+│   │   ├── index.css          # Tailwind configurations & direct input overrides
 │   │   └── main.jsx
 │   ├── package.json
 │   ├── vite.config.js
 │   ├── tailwind.config.js
-│   ├── postcss.config.js
 │   └── index.html
-├── package.json             # Root Orchestrator script list
+├── package.json               # Root Orchestrator script runner
 └── README.md
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Technology Stack
 
-* **Frontend:** React.js, Vite, Tailwind CSS, React Router v6, Axios, Lucide Icons, Socket.io-client.
-* **Backend:** Node.js, Express.js, Socket.io (WebSockets), Multer, Cloudinary SDK, Nodemailer, JWT (JSON Web Tokens), `bcryptjs` password hashing.
-* **Database:** MongoDB with Mongoose ORM.
-* **Deployment:** Production-ready single-service layout (serving React directly from Express in production mode).
+| Layer | Technologies Used |
+| :--- | :--- |
+| **Frontend** | React (Vite), Tailwind CSS, React Router v6, Axios, Lucide Icons, Socket.io-client |
+| **Backend** | Node.js, Express.js, Socket.io, Multer, Cloudinary SDK, Nodemailer |
+| **Database** | MongoDB with Mongoose ORM |
+| **Security** | JWT (JSON Web Tokens), `bcryptjs` password hashing |
+| **Deployment** | Split Serverless Architecture (Frontend on Netlify, Backend on Vercel, Database on MongoDB Atlas) |
 
 ---
 
-## 🚀 Getting Started Locally
+## 🛡️ Role-Based Access Controls (RBAC)
+
+CollabFlow enforces strict, role-based authorization to protect workspace integrity:
+
+| Feature Permission | 👑 Project Admin | 🧑 Workspace Member |
+| :--- | :---: | :---: |
+| Create New Projects | ✅ Yes | ❌ No |
+| Delete Projects & Scope | ✅ Yes | ❌ No |
+| Invite / Remove Members | ✅ Yes | ❌ No |
+| Create & Allocate Tasks | ✅ Yes | ❌ No |
+| Edit Task Details & Priority | ✅ Yes | ❌ No |
+| Delete Tasks | ✅ Yes | ❌ No |
+| Move Kanban Cards (Status) | ✅ Yes | ✅ Yes (Assigned tasks) |
+
+---
+
+## 🚀 Local Quickstart Guide
 
 ### 1. Prerequisites
-Ensure you have Node.js installed locally and a running MongoDB instance (either local `mongodb://localhost:27017` or a MongoDB Atlas connection string).
+* [Node.js](https://nodejs.org/) (v16+ recommended)
+* A running [MongoDB](https://www.mongodb.com/) database (local instance or MongoDB Atlas)
 
 ### 2. Installation
-From the root folder, run the orchestrator script to automatically install dependencies for both the backend and frontend:
+Clone your repository and run the orchestrator install script from the root workspace directory:
 ```bash
 npm run install-all
 ```
+This automatically installs all package dependencies for both the `backend` and `frontend` folders.
 
 ### 3. Environment Variables
-Configure your environment variables in `/backend/.env` (pre-configured for local out-of-the-box development):
+Create a file named `.env` inside the `/backend` directory. Here is a pre-configured template:
 ```env
 PORT=5000
 MONGODB_URI=mongodb://localhost:27017/taskmanager
-JWT_SECRET=your_super_secret_jwt_key_change_this_in_production
+JWT_SECRET=collabflow_super_secret_jwt_key_change_this_in_production
 JWT_EXPIRES_IN=7d
 NODE_ENV=development
 
@@ -111,109 +145,93 @@ SMTP_FROM=noreply@collabflow.com
 ```
 
 ### 4. Seed the Database
-We have provided a comprehensive seeder to clear your database and instantly load pre-packaged **Admin** and **Member** accounts, project boards, and active overdue tasks:
+Populate your database with complete sample data (users, projects, task distributions):
 ```bash
 npm run seed
 ```
 
-**Seeded Credentials:**
-* 👑 **Admin User:**
-  * **Email:** `admin@example.com`
-  * **Password:** `password123`
-* 🧑 **Member User:**
-  * **Email:** `member@example.com`
-  * **Password:** `password123`
+> 🔑 **Pre-Seeded Accounts:**
+> * 👑 **Admin:** `admin@example.com` / `password123`
+> * 🧑 **Member:** `member@example.com` / `password123`
 
 ### 5. Running the Application
+Open two separate terminal windows in your project root:
 
-To run the **Backend API** and **Vite Dev Server** concurrently, use these root-level scripts:
-
-* **Start Backend API** (Runs on port 5000):
+* **Terminal A (Start Backend API):**
   ```bash
   npm run dev-backend
   ```
-* **Start Frontend Dev Server** (Runs on port 5173):
+* **Terminal B (Start Frontend Dev Server):**
   ```bash
   npm run dev-frontend
   ```
 
-Open your browser and navigate to `http://localhost:5173` to explore CollabFlow.
+Open your browser and navigate to `http://localhost:5173`!
 
 ---
 
-## 🛡️ Role-Based Access Controls (RBAC)
+## 🌐 Production Cloud Deployment (Vercel + Netlify Split Serverless)
 
-CollabFlow supports granular security permissions out of the box:
+CollabFlow is production-ready and optimized for a zero-cost, high-performance **Split Cloud Architecture**:
+* **Frontend:** Hosted globally on **Netlify** for blistering fast CDN delivery.
+* **Backend:** Hosted on **Vercel** as a secure, auto-scaling Serverless API.
+* **Database:** Hosted on **MongoDB Atlas** for reliable, secure cloud storage.
 
-| Feature Permission | 👑 Project Admin | 🧑 Workspace Member |
-| :--- | :---: | :---: |
-| Create New Projects | ✅ Yes | ❌ No |
-| Delete Projects & Scope | ✅ Yes | ❌ No |
-| Invite Members to Project | ✅ Yes | ❌ No |
-| Remove Members from Project | ✅ Yes | ❌ No |
-| Create & Allocate Tasks | ✅ Yes | ❌ No |
-| Edit Task Details & Priority | ✅ Yes | ❌ No |
-| Delete Tasks | ✅ Yes | ❌ No |
-| Move Kanban Cards (Status Updates) | ✅ Yes | ✅ Yes (Assigned Projects) |
+### ⚙️ Backend Deployment (Vercel)
+1. Import the `backend` subfolder to Vercel as an **Express** project preset.
+2. In Vercel's **Environment Variables**, configure:
+   * `NODE_ENV` = `development` (Tells Express to operate in serverless API mode)
+   * `MONGODB_URI` = *Your MongoDB Atlas connection link*
+   * `JWT_SECRET` = *Your secure JWT signature secret*
+   * `JWT_EXPIRES_IN` = `7d`
+3. Click **Deploy**. Vercel will output your secure API domain (e.g. `https://your-app-backend.vercel.app`).
 
----
-
-## 🌐 Production & Railway Deployment
-
-CollabFlow is engineered for a **single-service deploy** (serving the compiled React app directly from Express). This eliminates CORS challenges, reduces costs, and optimizes load times.
-
-### How it works
-In production mode (`NODE_ENV=production`), the Express backend serves static production bundles from `/frontend/dist`. All client routing queries that aren't API endpoints are routed directly to React Router.
-
-### Deployment Steps:
-1. Push this entire codebase to a GitHub repository.
-2. Log in to [Railway.app](https://railway.app/) and select **New Project** -> **Deploy from GitHub**.
-3. Choose your repository.
-4. Set the following **Environment Variables** in Railway under the service settings:
-   * `NODE_ENV`: `production`
-   * `MONGODB_URI`: (Your MongoDB Atlas connection URI or select Railway MongoDB Plugin)
-   * `JWT_SECRET`: (Any secure random key)
-5. Under Railway's Service settings, set the **Build Command** to:
-   ```bash
-   npm run install-all && npm run build
-   ```
-6. Set the **Start Command** to:
-   ```bash
-   npm start
-   ```
-7. Generate a domain under the networking settings. Your full-stack app is live!
+### 💻 Frontend Deployment (Netlify)
+1. Import the `frontend` subfolder to Netlify.
+2. In the Netlify **Build settings**, configure:
+   * **Base directory:** `frontend`
+   * **Build command:** `npm run build`
+   * **Publish directory:** `dist`
+3. In Netlify's **Environment Variables**, connect the frontend to your Vercel backend:
+   * `VITE_API_URL` = `https://your-app-backend.vercel.app/api`
+   * `VITE_SOCKET_URL` = `https://your-app-backend.vercel.app`
+4. Click **Deploy**. Your premium application is live!
 
 ---
 
-## 📖 API Documentation
+## 📖 API Reference Index
 
-### Authentication (`/api/auth`)
-* `POST /signup` - Register user. (Body: `name`, `email`, `password`, `role`)
-* `POST /login` - Login. (Body: `email`, `password`)
-* `GET /me` - Get current user profile. (Requires JWT Header)
+### 🔐 Authentication (`/api/auth`)
+* `POST /signup` - Register a new user (`name`, `email`, `password`, `role`).
+* `POST /login` - Log in and obtain JWT access token.
+* `GET /me` - Get current authenticated user profile.
 
-### Projects (`/api/projects`)
-* `POST /` - Create project. (Requires JWT, Admin only)
-* `GET /` - List user's projects. (Requires JWT)
-* `GET /:id` - Get project. (Requires JWT)
-* `PUT /:id` - Edit project metadata. (Requires JWT, Project Admin only)
-* `DELETE /:id` - Delete project. (Requires JWT, Project Admin only)
-* `POST /:id/members` - Invite member by email. (Requires JWT, Project Admin only)
-* `DELETE /:id/members/:userId` - Remove member. (Requires JWT, Project Admin only)
+### 📁 Projects (`/api/projects`)
+* `POST /` - Create a new project (Admin only).
+* `GET /` - List all projects active for the authenticated user.
+* `GET /:id` - Retrieve specific project details.
+* `PUT /:id` - Update project metadata (Project Admin only).
+* `DELETE /:id` - Delete project (Project Admin only).
+* `POST /:id/members` - Add member to project by email (Project Admin only).
+* `DELETE /:id/members/:userId` - Remove member from project (Project Admin only).
 
-### Tasks (`/api/tasks`)
-* `POST /` - Allocate task. (Requires JWT, Admin only)
-* `GET /project/:projectId` - Fetch tasks. (Requires JWT)
-* `PUT /:id` - Edit task. (Requires JWT, Admin only)
-* `DELETE /:id` - Delete task. (Requires JWT, Admin only)
-* `PATCH /:id/status` - Move task column status. (Requires JWT)
+### 📋 Tasks (`/api/tasks`)
+* `POST /` - Allocate a new task (Admin only).
+* `GET /project/:projectId` - Fetch tasks for a project room.
+* `PUT /:id` - Edit task details, assignees, or priority (Admin only).
+* `DELETE /:id` - Remove a task (Admin only).
+* `PATCH /:id/status` - Move task status (`Pending`, `In Progress`, `Completed`).
 
-### Users & Avatars (`/api/users`)
-* `GET /` - Fetch all users registered on CollabFlow. (Requires JWT, Admin only)
-* `PUT /profile` - Update current user's profile details. (Requires JWT)
-* `PUT /avatar` - Upload a profile image (Multer file transfer). Saves to Cloudinary or falls back to local Base64 buffers. (Requires JWT)
+### 👤 Profile & Uploads (`/api/users`)
+* `GET /` - Fetch all workspace users (Admin only).
+* `PUT /profile` - Update profile name and email coordinates.
+* `PUT /avatar` - Upload profile picture (accepts image files; uploads to Cloudinary or falls back to Mongoose).
 
-### Dashboard (`/api/dashboard`)
-* `GET /stats` - Aggregate overview statistics. (Requires JWT)
-#   E t h a r a A I  
- 
+### 📈 Workspace Analytics (`/api/dashboard`)
+* `GET /stats` - Aggregated status counts and developer allocations (Admin only).
+
+---
+
+<div align="center">
+  <sub>Managed and Maintained by <b>EtharaAI</b></sub>
+</div>
