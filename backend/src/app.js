@@ -2,9 +2,14 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const errorHandler = require('./middleware/errorHandler');
+const connectDB = require('./config/db');
 
 // Load environment variables
 dotenv.config();
+
+// Connect to Database
+connectDB();
+
 
 // Route files
 const authRoutes = require('./routes/authRoutes');
